@@ -5,7 +5,6 @@
                 <nuxt-link class="nav-link" to="/" tag="li"><a>All Post</a></nuxt-link>
                 <nuxt-link class="nav-link" to="/about" tag="li"><a >About</a></nuxt-link>
             </ul>
-
         </nav>
     </header>
 </template>

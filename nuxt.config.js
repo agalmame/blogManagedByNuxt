@@ -22,7 +22,7 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#FFFFFF' },
+  loading: { color: 'red' },
 
   /*
   ** Global CSS
@@ -40,8 +40,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-    // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios'
+    ['storyblok-nuxt', {accessToken: 'VQ7J6cjNwG7Q1xN4lDOGhQtt', cacheProvider: 'memory'}]
   ],
   /*
   ** Axios module configuration

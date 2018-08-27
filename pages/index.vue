@@ -13,30 +13,47 @@
 </template>
 
 <script>
-import PostPreview from "@/components/Blog/index.vue"
+import PostPreview from "~/components/Blog/index.vue"
 export default {
   components:{
     PostPreview
   },
-  data() {
-    return{
-      posts :[{
-        title: 'a begining',
-        previewText: 'this is just a test',
-        thumbnailUrl: 'http://wall2born.com/data/out/308/image-45315079-nice-desktop-backgrounds-hd.jpg',
-        id:'an-simlpe-id'
-        
-      },
-      {
-        title: 'another',
-        previewText: 'this is just another',
-        thumbnailUrl: 'http://wall2born.com/data/out/308/image-45315079-nice-desktop-backgrounds-hd.jpg',
-        id:'an-simlpe-id1'
-        
-      },
-      ]
+  asyncData(context) {
+    return context.app.$storyapi
+      .get('cdn/stories', {
+        version: 'draft',
+        starts_with: 'blog/'
+      })
+      .then(res => {
+        return{ 
+          posts: res.data.stories.map(bp => {
+            return {
+              id: bp.slug,
+              title :bp.content.title,
+              previewText: bp.content.excerpt,
+              thumbnailUrl: bp.content.thumbnail,
+            }
+          })
+        }
+      })
     }
-  }
+  // data() {
+  //   return{
+  //     posts :[{
+  //       title: 'a begining',
+  //       previewText: 'this is just a test',
+  //       thumbnailUrl: 'http://wall2born.com/data/out/308/image-45315079-nice-desktop-backgrounds-hd.jpg',
+  //       id:'an-simlpe-id' 
+  //     },
+  //     {
+  //       title: 'another',
+  //       previewText: 'this is just another',
+  //       thumbnailUrl: 'http://wall2born.com/data/out/308/image-45315079-nice-desktop-backgrounds-hd.jpg',
+  //       id:'an-simlpe-id1'
+  //     },
+  //     ]
+  //   }
+  // }
 }
 </script>
 
@@ -47,6 +64,7 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  
 }
 @media (min-width: 35rem){
   .container{

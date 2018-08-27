@@ -1,9 +1,11 @@
 <template>
     <div id="post">
-        <div class="post-thumbnail">
-        </div>    
-        <h1>{{title}}</h1>
-        <p>{{content}}</p>
+        <div class="post-thumbnail" :style="{backgroundImage: 'url('+thumbnail+')'}">
+        </div>
+        <div class="post-content">  
+            <h1>{{title}}</h1>
+            <p>{{content}}</p>
+        </div>
     </div>
 </template>
 <script>
@@ -14,22 +16,30 @@ export default {
             starts_with: 'blog/'
         }).then(res=>{
             console.log(res)
-            // return{
-            //     title: res.data.story.content.title,
-            //     excerpt: res.data.story.content.excerpt,
-            //     content: res.data.story.content.content,
-            //     thumbnail: res.data.stry.content.thumbnail,
+            return{
+                title: res.data.stories[0].content.title,
+                excerpt: res.data.stories[0].content.excerpt,
+                content: res.data.stories[0].content.content,
+                thumbnail: res.data.stories[0].content.thumbnail,
 
-            // }
+            }
         })
     }
 }
 </script>
-<style scoped>
-/* #id {
-
+<style >
+#post {
+    white-space: pre-line;
+}
+.post-content {
+    width: 500px;
+    max-width: 80%;
+    margin: auto;
 }
 .post-thumbnail {
-
-} */
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+}
 </style>
